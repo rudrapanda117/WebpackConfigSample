@@ -23,3 +23,11 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+node_modules/
+src/main/resources/app/node_modules/
+src/main/resources/static/app/dist/
+src/main/resources/app/npm-debug.*
+src/main/resources/app/web/css/main.css
+
+
+
