@@ -8,10 +8,10 @@ const buildPath = '../static/app/dist'
 module.exports = {
 
   entry: {
-    bundle: ['./web/main.js']
+    app: ['./web/main.js']
   },
   output: {
-    filename: 'js/bundle.js',
+    filename: 'js/[name].js',
     path: path.join(__dirname, buildPath),
     publicPath:'/WebpackConfigSample/app/dist/'
   },
