@@ -26,3 +26,45 @@ When webpack-dev-server is set up , it can only serve those contents which are b
 		 If we use HtmlWebpackPlugin , then it injects the index.html to file list held by webpack .
 		 So webpack devserver can serve index.html without specifically being told where to serve from(contentbase)
 
+
+3) Setting up Proxy for dev server
+first bundle the js through webpack command.
+HtmlWebpackPlugin would include the js bundle automatically.
+First provide publicPath in webconfig value of '/WebpackConfigSample/app/dist/'
+How to decide what should go in public path.
+First set up the backend index.html and corresponding script tag 
+ <script type="text/javascript" src="/WebpackConfigSample/app/dist/js/bundle.js"></script></body>
+Here the index.html will be served from template when call is for http://localhost:8181/WebpackConfigSample/hello.htm.
+This in turn call script bundle.js.
+This file resides in static/app/dist.
+In spring boot static files are served from static / public folder automatically.
+So app/dist is where the front end generated js and css after building and bundling are copied to .
+We can have something else also instead of app/dist , so  we have to change the script in index.html <script type="text/javascript" src="/WebpackConfigSample/app/dist/js/bundle.js"></script></body> as <script type="text/javascript" src="/WebpackConfigSample/otherFolder/bundle.js"></script></body>
+
+This WebpackConfigSample is the context and app/dist is the folder where all the js and css (also images and fonts) resides.
+
+so for production every js and image and font file should be addressed with  /WebpackConfigSample/app/dist/ in index.html
+This becomes the publicPath , as HtmlWebpackPlucgin will prefix js , images ,css and fonts with publicPath.
+
+This is helpful when running devserver ,it keeps the same static folder address while in development as was in production.
+
+Copy the generated index.html to template folder and rest to app/dist of bin folder or build folder  for production mode.
+In development mode only copy the generated index.html .
+Rest will be automatically served from devserver.
+
+set Proxy to 
+
+proxy:{
+      "*":"http://localhost:8181/"
+    } 
+    
+    So when call goes to http://localhost:8445/WebpackConfigSample/hello.htm 
+    it is directed to http://localhost:8181/WebpackConfigSample/hello.htm as this cannot be served by devserver .
+    After that all the js will be served by devserver as it has the js generated with in.
+    
+    
+    This is helpfull when you only want to call backend for REST service while the front end is served by devserver for quick UI changes in js .
+    
+    Changes to css and js will only reflect . For changes to html you have to generate again and restart the backend server after coping index.html to war file .
+    
+

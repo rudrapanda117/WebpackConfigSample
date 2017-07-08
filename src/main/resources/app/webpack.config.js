@@ -3,7 +3,7 @@ var path = require('path')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const buildPath = 'dist'
+const buildPath = '../static/app/dist'
 
 module.exports = {
 
@@ -12,16 +12,20 @@ module.exports = {
   },
   output: {
     filename: 'js/bundle.js',
-    path: path.join(__dirname, buildPath)
-    
+    path: path.join(__dirname, buildPath),
+    publicPath:'/WebpackConfigSample/app/dist/'
   },
   devServer: {
-    //contentBase: __dirname + '/web',
-    port: 8445  
+    //contentBase: __dirname + '/template',
+    port: 8445,
+    //publicPath:'/'
+    proxy:{
+      "*":"http://localhost:8181/"
+    }  
   },
   plugins: [
         new HtmlWebpackPlugin({
-            template: './web/index.html', 
+            template: './template/index.html', 
         })
   ]
 }
