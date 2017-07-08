@@ -11,7 +11,7 @@ module.exports = {
     app: ['./web/main.js']
   },
   output: {
-    filename: 'js/[name].js',
+    filename: 'js/[name].[hash].js',
     path: path.join(__dirname, buildPath),
     publicPath:'/WebpackConfigSample/app/dist/'
   },
