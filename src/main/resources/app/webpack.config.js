@@ -19,9 +19,9 @@ module.exports = {
     //contentBase: __dirname + '/template',
     port: 8445,
     //publicPath:'/'
-    proxy:{
-      "*":"http://localhost:8181/"
-    }  
+    // proxy:{
+    //   "*":"http://localhost:8181/"
+    // }  
   },
   plugins: [
         new HtmlWebpackPlugin({

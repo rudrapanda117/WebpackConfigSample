@@ -66,5 +66,14 @@ proxy:{
     This is helpfull when you only want to call backend for REST service while the front end is served by devserver for quick UI changes in js .
     
     Changes to css and js will only reflect . For changes to html you have to generate again and restart the backend server after coping index.html to war file .
-    
+  
+  4) Devserver with proxy off
+  just comment out proxy settings in webconfig
+  Let the publicPath be same as before .
+  Now index.html generated will be access by http://localhost:8445/WebpackConfigSample/app/dist/
+  
+  WebpackConfigSample/app/dist/ is the publicPath under which generated js,html , css and font is available.
+  if publicPath is made to / then http://localhost:8445/ .
+  
+  Other wise webpack dev server searches for index.html which it does not find and shows the directory folder .
 
