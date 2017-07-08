@@ -16,7 +16,12 @@ module.exports = {
     
   },
   devServer: {
-    contentBase: __dirname + '/web',
+    //contentBase: __dirname + '/web',
     port: 8445  
-  }
+  },
+  plugins: [
+        new HtmlWebpackPlugin({
+            template: './web/index.html', 
+        })
+  ]
 }
