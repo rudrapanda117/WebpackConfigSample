@@ -77,3 +77,5 @@ proxy:{
   
   Other wise webpack dev server searches for index.html which it does not find and shows the directory folder .
 
+5) Separating vendor bundle for third party js
+tag 10-Separating_vendor_bundle

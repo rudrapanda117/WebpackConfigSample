@@ -8,7 +8,8 @@ const buildPath = '../static/app/dist'
 module.exports = {
 
   entry: {
-    app: ['./web/main.js']
+    app: ['./web/main.js'],
+    vendor:['angular']
   },
   output: {
     filename: 'js/[name].[hash].js',
