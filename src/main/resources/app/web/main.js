@@ -1,6 +1,14 @@
 import angular from "angular";
 
+import  'jquery';
+//import 'jquery/dist/jquery.js';
+//import 'jqueryalias';
+
 document.getElementById('hello').style.color="red";
+
+$('#jqueryhello1').css("color", "red");
+jQuery('#jqueryhello2').css("color", "blue");
+window.jQuery('#jqueryhello3').css("color", "green");
 
 angular.module('F1FeederApp.controllers', []).
 controller('driversController', function($scope) {

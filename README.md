@@ -79,3 +79,28 @@ proxy:{
 
 5) Separating vendor bundle for third party js
 tag 10-Separating_vendor_bundle
+
+6) Hashing for cache busting 
+This is useful in production as it clears the cache .
+But in development mode this leads to memory issue as old files are not removed.
+
+7) Adding third party library Jquery
+Tag 11-Adding_JQuery
+
+npm install --save jquery
+Add jquery to vendor list  vendor: ['angular', 'jquery'] //jqueryalias
+
+import 'jquery'
+use provideplugin to expose the jquery to global
+Jquery is a library which works by exposing $ or JQuery variable to global scope.
+So when you import the library the $ is not set to global scope instead it remains inside the module where you have imported.
+To expose it to global scope , use provide plugin .
+
+We can import jquery by mentioniung the complete path like import 'jquery/dist/jquery.js';
+Again these paths tend to become larger for importing individual js files.
+So we will use aliases to represent these paths 
+
+alias: {
+      jqueryalias: __dirname + "/node_modules/jquery/dist/jquery.js"
+    }
+Now we can use import 'jqueryalias'; statement to import jquery . This helps in maintaining individual library js files .
