@@ -48,11 +48,24 @@ module.exports = {
     //https://stackoverflow.com/questions/30329337/how-to-bundle-vendor-scripts-separately-and-require-them-as-needed-with-webpack
     //Third Party library are repeated in app and vendor bundle
     //https://stackoverflow.com/questions/43287290/webpack-2-vendor-bundle
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: "vendor",
-    //   //filename: "js/vendor.bundle.js",
-    //   chunks: ['app','vendor'], // Select the source chunks by chunk names. The chunk must be a child of the commons chunk.// If omitted all entry chunks are selected.
-           
-    // }),
+     //Manual vendor separation
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "vendor",
+      //name: "thirdparty", //mandatory name of this common chunks. Can take existing chunk like vendor.
+      // If name is thirdparty then vendor.js will be empty and all the thirdparty library will be moved to thirdparty.js.
+     // filename: "js/a.js", // if turned on the file name should not be same as anyof the existing chunk name.
+      // Select the source chunks by chunk names. The chunk must be a child of the commons chunk.
+      // If omitted all entry chunks are selected.
+      chunks: ['app', 'vendor']
+    }),
+    // Automatically move all modules defined outside of application directory to vendor bundle.
+    // If you are using more complicated project structure, consider to specify common chunks manually.
+    //  new webpack.optimize.CommonsChunkPlugin({
+    //           name: 'vendor',
+    //           minChunks: function(module, count) {
+    //             console.log(module.resource);
+    //               return module.resource && module.resource.indexOf(path.resolve(__dirname, 'web')) === -1;
+    //           }
+    //       }),
   ]
 }

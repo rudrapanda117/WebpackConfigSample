@@ -104,3 +104,27 @@ alias: {
       jqueryalias: __dirname + "/node_modules/jquery/dist/jquery.js"
     }
 Now we can use import 'jqueryalias'; statement to import jquery . This helps in maintaining individual library js files .
+
+8) Separate common modules
+Tag 12-Commons_Chunks_Plugin
+after adding jquery and angular library you will observe that these library are repeated in both app.bundle.js and vendor.bundle.js
+This is because you have imported into main.js and that goes into app.bundle.js
+Also you have inclided those in vendor list .
+So the repeatations.
+To avoid this kind of issues we have to use commonchunks plugin , which checks common code between mentioned chunks and remove them to separate chunks.
+
+If the name of common chunk is not existing chunk like vendor (chunk name is thirdparty) , then vendor.bundle.js will be empty.
+So in the end vendor.bundle.js will be create which will be empty (depends) and thirdparty.js will be created which will have all the third party libraries.
+
+Automatic chunk separation
+Mentioning chunks manually in vendor chunks and then in common chunks can be taxing , but to automate the separation such that any third party library will be automatically moved to vendor chunk
+ new webpack.optimize.CommonsChunkPlugin({
+              name: 'vendor',
+              minChunks: function(module, count) {
+                console.log(module.resource);
+                  return module.resource && module.resource.indexOf(path.resolve(__dirname, 'web')) === -1;
+              }
+          }),
+          
+          
+  This will move all the js or css or any resources outside the web folder and refrenced in main.js will automatically moved to vendor chunk.        
