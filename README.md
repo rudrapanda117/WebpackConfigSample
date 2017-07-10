@@ -135,3 +135,23 @@ Mentioning chunks manually in vendor chunks and then in common chunks can be tax
     and the identifier is filled with the exports of the loaded module (of property in order to support named exports).
    let expression = `require(${JSON.stringify(request[0])})`;
    https://stackoverflow.com/questions/28969861/managing-jquery-plugin-dependency-in-webpack      
+   
+   Why providePlugin is used for Jquery but not for angular ?
+   This depends on how the angular and JQuery are exposed to global scope i.e window.
+  
+   if ( !noGlobal ) {
+		window.jQuery = window.$ = jQuery;
+	}
+	 For JQuery above code exposes JQuery to window which is by default turned off as noGlobal is true.
+	module.exports = global.document ?
+			factory( global, true ) :  here noGlobal is set as true 
+			function( w ) {
+				if ( !w.document ) {
+					throw new Error( "jQuery requires a window with a document" );
+				}
+				return factory( w );
+			};
+	} else {
+		factory( global );
+	}
+ 
