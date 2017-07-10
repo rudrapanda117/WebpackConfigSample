@@ -155,3 +155,12 @@ Mentioning chunks manually in vendor chunks and then in common chunks can be tax
 		factory( global );
 	}
  
+ So in ProvidePlugin 
+ $:'jquery'  translate to window.$=require('jquery')
+ This loads the jquery from node module , runs the IIFE and assigns the jquery function in module.export to Window.$.
+ 
+ 
+ 
+ For angular
+ 
+ Window is passed to IIFE explicitly .
