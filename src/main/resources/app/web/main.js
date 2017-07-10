@@ -7,6 +7,8 @@ import 'jquery';
 
 import './controller1';
 
+import helloTemplateInlineHtmlTemplate from '../template/helloTemplateInlineHtml.html';
+
 document.getElementById('hello').style.color = "red";
 
 $('#jqueryhello1').css("color", "red");
@@ -39,7 +41,14 @@ mainModule.config(function ($stateProvider) {
         templateUrl: 'hello2.htm'
     }
 
+     var helloTemplateInlineHtml = {
+        name: 'helloTemplateInlineHtml',
+        url: '/helloTemplateInlineHtml',
+        template: helloTemplateInlineHtmlTemplate
+    }
+
     $stateProvider.state(helloTemplate);
     $stateProvider.state(helloTemplateURL1);
     $stateProvider.state(helloTemplateURL2);
+    $stateProvider.state(helloTemplateInlineHtml);
 });

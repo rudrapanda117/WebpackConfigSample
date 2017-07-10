@@ -33,7 +33,7 @@
                 <tr ng-repeat="driver in driversList">
                     <td>{{$index + 1}}</td>
                     <td>
-                        <img src="img/flags/{{driver.Driver.nationality}}.png" /> {{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}}
+                        <!--<img src="img/flags/{{driver.Driver.nationality}}.png" />--> {{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}}
                     </td>
                     <td>{{driver.Constructors[0].name}}</td>
                     <td>{{driver.points}}</td>
@@ -45,6 +45,7 @@
         <a ui-sref="helloTemplate" ui-sref-active="active">Ui-router with inline template</a></br>
         <a ui-sref="helloTemplateURL1" ui-sref-active="active">Ui-router with templateURL served from static folder</a></br>
         <a ui-sref="helloTemplateURL2" ui-sref-active="active">Ui-router with templateURL served from template folder</a></br>
+        <a ui-sref="helloTemplateInlineHtml" ui-sref-active="active">Ui-router with template inlined with html loader</a></br>
 
         <ui-view></ui-view>
 

@@ -19,6 +19,17 @@ module.exports = {
     path: path.join(__dirname, buildPath),
     publicPath: '/WebpackConfigSample/app/dist/'
   },
+  module: {
+  rules: [{
+    test: /\.html$/,
+    use: [ {
+      loader: 'html-loader',
+      options: {
+        minimize: false
+      }
+    }],
+  }]
+},
   devServer: {
     //contentBase: __dirname + '/template',
     port: 8445,

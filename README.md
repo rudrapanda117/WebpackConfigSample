@@ -168,3 +168,7 @@ Mentioning chunks manually in vendor chunks and then in common chunks can be tax
  10) Ui router set up 
  Create hello1.html in static/app/dist folder .for this url should be http://localhost:8445/WebpackConfigSample/app/dist/hello1.html
  Create hello1.html in static folder .for this url should be http://localhost:8445/WebpackConfigSample/hello1.html
+ 
+ 11) Using Html Loader to inline Html files
+ This loader converts the html to string and can be used as template instead of template url .
+ This also handles the images gives image loader are also present .
