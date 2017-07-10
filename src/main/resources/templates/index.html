@@ -1,16 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-    </head>
-    <body>
-        <div id="hello">
-    Hello!!
-    </div>
-<script src="app/dist/js/bundle.js" ></script>
 
-    </body>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+    <div id="hello">
+        Hello!!@
+    </div>
+    <div id="jqueryhello1">
+        Hello from JQuery using $
+    </div>
+    <div id="jqueryhello2">
+        Hello from JQuery using JQuery
+    </div>
+    <div id="jqueryhello3">
+        Hello from JQuery using window.jquery
+    </div>
+    <!--<script src="dist/js/bundle.js"></script>-->
+    <div ng-app="F1FeederApp" ng-controller="driversController">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="4">Drivers Championship Standings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="driver in driversList">
+                    <td>{{$index + 1}}</td>
+                    <td>
+                        <img src="img/flags/{{driver.Driver.nationality}}.png" /> {{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}}
+                    </td>
+                    <td>{{driver.Constructors[0].name}}</td>
+                    <td>{{driver.points}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<script type="text/javascript" src="/WebpackConfigSample/app/dist/js/vendor.bundle.js"></script><script type="text/javascript" src="/WebpackConfigSample/app/dist/js/app.bundle.js"></script></body>
+
 </html>

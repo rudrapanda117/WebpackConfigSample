@@ -12,4 +12,9 @@ public class HelloController {
         return "index";
     }
 
+    
+    @RequestMapping("/hello2.htm")
+    public String hello2() {
+        return "hello2";
+    }
 }

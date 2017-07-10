@@ -164,3 +164,7 @@ Mentioning chunks manually in vendor chunks and then in common chunks can be tax
  For angular
  
  Window is passed to IIFE explicitly .
+ 
+ 10) Ui router set up 
+ Create hello1.html in static/app/dist folder .for this url should be http://localhost:8445/WebpackConfigSample/app/dist/hello1.html
+ Create hello1.html in static folder .for this url should be http://localhost:8445/WebpackConfigSample/hello1.html

@@ -1,13 +1,13 @@
 import angular from "angular";
 import ui_router from '@uirouter/angularjs';
 
-import  'jquery';
+import 'jquery';
 //import 'jquery/dist/jquery.js';
 //import 'jqueryalias';
 
 import './controller1';
 
-document.getElementById('hello').style.color="red";
+document.getElementById('hello').style.color = "red";
 
 $('#jqueryhello1').css("color", "red");
 jQuery('#jqueryhello2').css("color", "blue");
@@ -15,24 +15,31 @@ window.jQuery('#jqueryhello3').css("color", "green");
 
 
 
-var mainModule=angular.module('F1FeederApp', [
+var mainModule = angular.module('F1FeederApp', [
     ui_router,
-  'F1FeederApp.controllers'
+    'F1FeederApp.controllers'
 ]);
 
-mainModule.config(function($stateProvider) {
-  var helloState = {
-    name: 'hello',
-    url: '/hello',
-    template: '<h3>hello world!</h3>'
-  }
+mainModule.config(function ($stateProvider) {
+    var helloTemplate = {
+        name: 'helloTemplate',
+        url: '/helloTemplate',
+        template: '<h3>hello world! inlined template</h3>'
+    }
 
-  var aboutState = {
-    name: 'about',
-    url: '/about',
-    template: '<h3>Its the UI-Router hello world app!</h3>'
-  }
+    var helloTemplateURL1 = {
+        name: 'helloTemplateURL1',
+        url: '/helloTemplateURL1',
+        templateUrl: 'hello1.html'
+    }
 
-  $stateProvider.state(helloState);
-  $stateProvider.state(aboutState);
+    var helloTemplateURL2 = {
+        name: 'helloTemplateURL2',
+        url: '/helloTemplateURL2',
+        templateUrl: 'hello2.htm'
+    }
+
+    $stateProvider.state(helloTemplate);
+    $stateProvider.state(helloTemplateURL1);
+    $stateProvider.state(helloTemplateURL2);
 });
