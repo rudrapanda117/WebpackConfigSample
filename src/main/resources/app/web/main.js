@@ -1,5 +1,6 @@
 import angular from "angular";
 import ui_router from '@uirouter/angularjs';
+import './oclazyload';
 
 import 'jquery';
 //import 'jquery/dist/jquery.js';
@@ -7,7 +8,12 @@ import 'jquery';
 
 import './controller1';
 
+import './syncModule';
+
 import helloTemplateInlineHtmlTemplate from '../template/helloTemplateInlineHtml.html';
+import syncModuleControllerTemplate from '../template/syncModuleControllerTemplate.html';
+import asyncModuleControllerTemplate1 from '../template/asyncModuleControllerTemplate.1.html';
+import asyncModuleControllerTemplate2 from '../template/asyncModuleControllerTemplate.2.html';
 
 document.getElementById('hello').style.color = "red";
 
@@ -18,7 +24,7 @@ window.jQuery('#jqueryhello3').css("color", "green");
 
 
 var mainModule = angular.module('F1FeederApp', [
-    ui_router,
+    ui_router,'syncModule','oc.lazyLoad',
     'F1FeederApp.controllers'
 ]);
 
@@ -47,8 +53,92 @@ mainModule.config(function ($stateProvider) {
         template: helloTemplateInlineHtmlTemplate
     }
 
+    var syncModuleController = {
+        name: 'syncModuleController',
+        url: '/syncModuleController',
+        template: syncModuleControllerTemplate,
+        controller:'syncController as smc',
+        // resolve: {
+        // syncModuleResolve: ['$q', '$ocLazyLoad', function($q, $ocLazyLoad) {
+        //                     var deferred = $q.defer();
+        //                     var moduleName = 'syncModule';
+        //                     require.ensure([], function(require) {
+        //                         require('./syncModule');
+
+        //                         $ocLazyLoad.load({
+        //                             name: moduleName,
+        //                         });
+
+        //                         deferred.resolve(angular.module(moduleName).controller);
+        //                     }, 'syncModule'); //naming chunkfiles
+
+        //                     return deferred.promise;
+        //                 }]
+        // }
+    }
+
+    var asyncModuleController1 = {
+        name: 'asyncController1',
+        url: '/asyncController1',
+        template: asyncModuleControllerTemplate1,
+        controller:'asyncController1 as asmc1',
+        resolve: {
+        syncModuleResolve: ['$q', '$ocLazyLoad', function($q, $ocLazyLoad) {
+                            var deferred = $q.defer();
+                            var moduleName = 'asyncModule1';
+                            
+                            // require.ensure([], function(require) {
+                            //     require('./asyncModule1');
+
+                            //     $ocLazyLoad.load({
+                            //         name: moduleName,
+                            //     });
+
+                            //     deferred.resolve(angular.module(moduleName).controller);
+                            // }, 'asyncModule1'); //naming chunkfiles
+
+                            import(/* webpackChunkName: "asyncModule1" */ './asyncModule1').then(function(){
+                                    $ocLazyLoad.load({
+                                    name: moduleName,
+                                });
+
+                                deferred.resolve(angular.module(moduleName).controller);
+                            });
+
+                            return deferred.promise;
+                        }]
+        }
+    }
+
+    var asyncModuleController2 = {
+        name: 'asyncController2',
+        url: '/asyncController2',
+        template: asyncModuleControllerTemplate2,
+        controller:'asyncController2 as asmc2',
+        resolve: {
+        syncModuleResolve: ['$q', '$ocLazyLoad', function($q, $ocLazyLoad) {
+                            var deferred = $q.defer();
+                            var moduleName = 'asyncModule2';
+                            require.ensure([], function(require) {
+                                require('./asyncModule2');
+
+                                $ocLazyLoad.load({
+                                    name: moduleName,
+                                });
+
+                                deferred.resolve(angular.module(moduleName).controller);
+                            }, 'asyncModule2'); //naming chunkfiles
+
+                            return deferred.promise;
+                        }]
+        }
+    }
+
     $stateProvider.state(helloTemplate);
     $stateProvider.state(helloTemplateURL1);
     $stateProvider.state(helloTemplateURL2);
     $stateProvider.state(helloTemplateInlineHtml);
+    $stateProvider.state(syncModuleController);
+    $stateProvider.state(asyncModuleController1);
+    $stateProvider.state(asyncModuleController2);
 });

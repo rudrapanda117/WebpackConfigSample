@@ -17,7 +17,8 @@ module.exports = {
   output: {
     filename: 'js/[name].bundle.js', // do not use hash in developement mode as old files are not removed and it may lead to memmory shortage
     path: path.join(__dirname, buildPath),
-    publicPath: '/WebpackConfigSample/app/dist/'
+    publicPath: '/WebpackConfigSample/app/dist/',
+     chunkFilename: '[name].js'
   },
   module: {
   rules: [{
@@ -34,9 +35,9 @@ module.exports = {
     //contentBase: __dirname + '/template',
     port: 8445,
     //publicPath:'/'
-    proxy:{
-      "*":"http://localhost:8181/"
-    }  
+    // proxy:{
+    //   "*":"http://localhost:8181/"
+    // }  
   },
   resolve: {
     //extensions: ['*', '.js', '.jsx', '.json'],

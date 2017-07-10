@@ -173,3 +173,20 @@ Mentioning chunks manually in vendor chunks and then in common chunks can be tax
  Tag 15-Html-Loader
  This loader converts the html to string and can be used as template instead of template url .
  This also handles the images gives image loader are also present .
+ 
+ 12) Lazy loading
+ Tag 16-Lazy_Loading_and_code_splitting
+ https://oclazyload.readme.io/docs/webpack
+ https://github.com/ocombe/ocLazyLoad/tree/master/examples
+ https://michalzalecki.com/lazy-load-angularjs-with-webpack/
+ 	You need both ocLazyLoad and RequireJS because with you now deal with two separate module concepts - your javascript modules and the angular internal modules.
+
+After the initial bootstrap, angularjs doesn't allow registering new modules and components like directives and controllers anymore (at least not using the standard way).
+
+RequireJS only loads javascript files but it doesn't register the new angular modules and components in this new code
+
+What ocLazyLoad does is to allow you to load your additional files using a third party module loader like RequireJS and the more important thing - it registers in angular the new modules and components in the lazily loaded code.
+
+In summary - you can lazily load code using only RequireJS, but you can't load angular modules and components only using RequireJS. There is a need for extra work, like this performed by ocLazyLoad.
+
+It allows you to separate different areas of your app into different physical bundles, the loading of which will be deferred until the associated route set up with ui-router is initially resolved. This allows you to maintain a single app structure without loading all modules up front. The primary motivation is performance, but it also has security implications because if the user is not authorized to access a route corresponding to a separate bundle, the code for that bundle may not even be loaded from the server.
