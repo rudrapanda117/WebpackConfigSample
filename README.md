@@ -127,4 +127,11 @@ Mentioning chunks manually in vendor chunks and then in common chunks can be tax
           }),
           
           
-  This will move all the js or css or any resources outside the web folder and refrenced in main.js will automatically moved to vendor chunk.        
+  This will move all the js or css or any resources outside the web folder and refrenced in main.js will automatically moved to vendor chunk.  
+  
+  9) Provide Plugin
+  Tag 13-Provide_Plugin
+  Whenever the identifier is encountered as free variable in a module, the module is loaded automatically 
+    and the identifier is filled with the exports of the loaded module (of property in order to support named exports).
+   let expression = `require(${JSON.stringify(request[0])})`;
+   https://stackoverflow.com/questions/28969861/managing-jquery-plugin-dependency-in-webpack      

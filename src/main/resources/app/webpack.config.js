@@ -12,7 +12,7 @@ module.exports = {
 
   entry: {
     app: ['./web/main.js'],
-    vendor: ['angular', 'jquery'] //jqueryalias
+    vendor: ['angular', 'jqueryalias'] //jqueryalias
   },
   output: {
     filename: 'js/[name].bundle.js', // do not use hash in developement mode as old files are not removed and it may lead to memmory shortage
@@ -34,11 +34,16 @@ module.exports = {
     }
   },
   plugins: [
+    //Whenever the identifier is encountered as free variable in a module, the module is loaded automatically 
+   // and the identifier is filled with the exports of the loaded module (of property in order to support named exports).
+   //let expression = `require(${JSON.stringify(request[0])})`;
+   //https://stackoverflow.com/questions/28969861/managing-jquery-plugin-dependency-in-webpack
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
-      "window.jQuery": "jquery"
+      "window.jQuery": "jquery" // Important as this is used by angular to determine wheter to use JQlite or Jquery
     }),
+    
     new HtmlWebpackPlugin({
       template: './template/index.html',
       // hash:true // do not use hash in developement mode as old files are not removed and it may lead to memmory shortage
