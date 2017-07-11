@@ -251,4 +251,29 @@ LazyLoading Html Template
   
   Using Bundle Loader
   Tag 20-Using_Bundle_Loader
-                                 
+ 
+ https://stackoverflow.com/questions/40763870/require-multiple-files-dynamically-using-webpack-bundle-loader
+                    
+   with bundle loader
+   var load = require("bundle-loader?lazy&name=usingbundleloaderModule!./usingbundleloaderModule.js");
+                load(function (file) {
+                    //require('./usingbundleloaderModule');
+
+                    $ocLazyLoad.load({
+                        name: moduleName,
+                    });
+
+                    deferred.resolve(angular.module(moduleName).component);
+                });                 
+                    
+   with Promise loader
+    var load = require("promise-loader?bluebird,usingbundleloaderModule!./usingbundleloaderModule.js");
+                load().then(function (file) {
+                    //require('./usingbundleloaderModule');
+
+                    $ocLazyLoad.load({
+                        name: moduleName,
+                    });
+
+                    deferred.resolve(angular.module(moduleName).component);
+                });                              

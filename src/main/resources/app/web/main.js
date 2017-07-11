@@ -210,9 +210,20 @@ mainModule.config(function ($stateProvider) {
             lazyLoadComponent: ['$q', '$ocLazyLoad', function ($q, $ocLazyLoad) {
                 var deferred = $q.defer();
                 var moduleName = 'usingbundleloaderModule';
-                var load = require("bundle-loader?lazy&name=usingbundleloaderModule!./usingbundleloaderModule.js");
-                load(function (file) {
-                    require('./usingbundleloaderModule');
+                // var load = require("bundle-loader?lazy&name=usingbundleloaderModule!./usingbundleloaderModule.js");
+                // load(function (file) {
+                //     //require('./usingbundleloaderModule');
+
+                //     $ocLazyLoad.load({
+                //         name: moduleName,
+                //     });
+
+                //     deferred.resolve(angular.module(moduleName).component);
+                // });
+
+                 var load = require("promise-loader?bluebird,usingbundleloaderModule!./usingbundleloaderModule.js");
+                load().then(function (file) {
+                    //require('./usingbundleloaderModule');
 
                     $ocLazyLoad.load({
                         name: moduleName,
