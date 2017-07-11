@@ -243,4 +243,9 @@ LazyLoading Html Template
                     });
 
                     deferred.resolve(angular.module(moduleName).controller);
-                });                                
+                }); 
+  Dynamic Importing Angular component
+  Tag 19-Dynamic_importing_Component
+  
+  Instead of using controller , use component and also lazy load the component .
+                                 

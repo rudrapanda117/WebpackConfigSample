@@ -89,7 +89,7 @@ mainModule.config(function ($stateProvider) {
                 var deferred = $q.defer();
                 var moduleName = 'asyncModule1';
 
-                require.ensure([], function(require) {
+                require.ensure([], function (require) {
                     require('./asyncModule1');
 
                     $ocLazyLoad.load({
@@ -99,8 +99,9 @@ mainModule.config(function ($stateProvider) {
                     deferred.resolve(angular.module(moduleName).controller);
                 }, 'asyncModule1'); //naming chunkfiles
 
-              var imported= import ( /* webpackChunkName: "asyncModule1" */ './asyncModule1');
-              imported.then(function () {
+                var imported =
+                    import ( /* webpackChunkName: "asyncModule1" */ './asyncModule1');
+                imported.then(function () {
                     $ocLazyLoad.load({
                         name: moduleName,
                     });
@@ -145,7 +146,7 @@ mainModule.config(function ($stateProvider) {
         templateProvider: ($q) => {
             return $q((resolve) => {
                 // lazy load the view
-                require.ensure([], () => resolve(require('../template/lazyLoadingTemplate.html')),'lazyLoadingTemplateHtml');
+                require.ensure([], () => resolve(require('../template/lazyLoadingTemplate.html')), 'lazyLoadingTemplateHtml');
             });
         },
         controller: 'lazyLoadingTemplateController as ltt',
@@ -168,6 +169,33 @@ mainModule.config(function ($stateProvider) {
         }
     }
 
+    var lazyLoadComponentModule= {
+        name:'lazyLoadComponentModule',
+        url: '/lazyLoadComponentModule',
+        component: 'lazyLoadComponent',
+        resolve: {
+            user: function () {
+                return {
+                    id: 'qwerty'
+                };
+            },
+            lazyLoadComponent: ['$q', '$ocLazyLoad', function ($q, $ocLazyLoad) {
+                var deferred = $q.defer();
+                var moduleName = 'lazyLoadComponentModule';
+                require.ensure([], function (require) {
+                    require('./lazyLoadComponentModule');
+
+                    $ocLazyLoad.load({
+                        name: moduleName,
+                    });
+
+                    deferred.resolve(angular.module(moduleName).component);
+                }, 'lazyLoadComponentModule'); //naming chunkfiles
+
+                return deferred.promise;
+            }]
+        }
+    };
 
 
     $stateProvider.state(helloTemplate);
@@ -179,4 +207,6 @@ mainModule.config(function ($stateProvider) {
     $stateProvider.state(asyncModuleController2);
 
     $stateProvider.state(lazyLoadingTemplate);
+
+    $stateProvider.state(lazyLoadComponentModule);
 });
