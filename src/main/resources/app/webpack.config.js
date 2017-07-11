@@ -57,7 +57,8 @@ module.exports = {
     }),
     
     new HtmlWebpackPlugin({
-      template: './template/index.html',
+      //template: './template/index.1.ejs',
+       template: './template/index.html',
       // hash:true // do not use hash in developement mode as old files are not removed and it may lead to memmory shortage
     }),
     // new CleanWebpackPlugin(['../static/app'])  // cannot be used as the destination is outside the project root instead use rimraf

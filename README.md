@@ -226,4 +226,10 @@ require.ensure([], function(require) {
                             
 
 LazyLoading Html Template
-                            
+ Tag 17-Lazy_loading_html_templates
+  templateProvider: ($q) => {
+            return $q((resolve) => {
+                // lazy load the view
+                require.ensure([], () => resolve(require('../template/lazyLoadingTemplate.html')),'lazyLoadingTemplateHtml');
+            });
+        }                           

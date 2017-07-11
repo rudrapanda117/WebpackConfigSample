@@ -15,6 +15,8 @@ import syncModuleControllerTemplate from '../template/syncModuleControllerTempla
 import asyncModuleControllerTemplate1 from '../template/asyncModuleControllerTemplate.1.html';
 import asyncModuleControllerTemplate2 from '../template/asyncModuleControllerTemplate.2.html';
 
+
+
 document.getElementById('hello').style.color = "red";
 
 $('#jqueryhello1').css("color", "red");
@@ -97,19 +99,18 @@ mainModule.config(function ($stateProvider) {
                     deferred.resolve(angular.module(moduleName).controller);
                 }, 'asyncModule1'); //naming chunkfiles
 
-                // import ( /* webpackChunkName: "asyncModule1" */ './asyncModule1')
-                // .then(function () {
-                //     $ocLazyLoad.load({
-                //         name: moduleName,
-                //     });
+            //   var  import ( /* webpackChunkName: "asyncModule1" */ './asyncModule1').then(function () {
+            //         $ocLazyLoad.load({
+            //             name: moduleName,
+            //         });
 
-                //     deferred.resolve(angular.module(moduleName).controller);
-                // });
+            //         deferred.resolve(angular.module(moduleName).controller);
+            //     });
 
                 return deferred.promise;
             }]
         }
-    }
+    };
 
     var asyncModuleController2 = {
         name: 'asyncController2',
