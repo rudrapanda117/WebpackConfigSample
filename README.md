@@ -276,4 +276,31 @@ LazyLoading Html Template
                     });
 
                     deferred.resolve(angular.module(moduleName).component);
-                });                              
+                });        
+                
+  13 ) Image Loader
+  Tag 21-Image_Loader
+  For image loader we use file loader and url loader.
+  File loader is used to deal with image as a file .
+  To deal with images in html templates we have html loader which converts the html to string .
+  This also resolves the images also .
+  If we see the generated webpack code 
+  every image src <img src="../img/png/Home-icon20.png"> loaded by file loader is converted to 
+  /***/ }),
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "/img/png/Home-icon6.png";
+
+/***/ })      
+Here    __webpack_require__.p points to public path which we have set to /WebpackConfigSample/app/dist.
+Since images are static , they cannot be served under /WebpackConfigSample/app/dist/ path. 
+So when we access http://localhost:8445/WebpackConfigSample/app/dist/img/png/img/png/Home-icon6.png , it will give 404 in dev server.
+This is because images are served under  http://localhost:8445/img/png/img/png/Home-icon6.png  .
+That is default publicpath which point to root folder /app.
+So to make this work without proxy we have to point the public path to default  .We have to omit public path.
+Not publicPath :'/'. This loades images from http://img/png/Home-icon5.png.
+Wen we omit public path , it points to /app the root folder . http://localhost:8445/img/png/Home-icon8.png
+
+But without publicpath and publicpath pointing to / webpack dev server shows "webpack output is served from /"
+                     
