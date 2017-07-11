@@ -1,6 +1,6 @@
 import angular from "angular";
 import ui_router from '@uirouter/angularjs';
-import './oclazyload';
+import 'oclazyload';
 
 import 'jquery';
 //import 'jquery/dist/jquery.js';
@@ -169,8 +169,8 @@ mainModule.config(function ($stateProvider) {
         }
     }
 
-    var lazyLoadComponentModule= {
-        name:'lazyLoadComponentModule',
+    var lazyLoadComponentModule = {
+        name: 'lazyLoadComponentModule',
         url: '/lazyLoadComponentModule',
         component: 'lazyLoadComponent',
         resolve: {
@@ -197,6 +197,37 @@ mainModule.config(function ($stateProvider) {
         }
     };
 
+    var bundlelazyLoadComponentModule = {
+        name: 'usingbundleloaderModule',
+        url: '/usingbundleloaderModule',
+        component: 'usingbundleloaderComponent',
+        resolve: {
+            user: function () {
+                return {
+                    id: 'qwerty'
+                };
+            },
+            lazyLoadComponent: ['$q', '$ocLazyLoad', function ($q, $ocLazyLoad) {
+                var deferred = $q.defer();
+                var moduleName = 'usingbundleloaderModule';
+                var load = require("bundle-loader?lazy&name=usingbundleloaderModule!./usingbundleloaderModule.js");
+                load(function (file) {
+                    require('./usingbundleloaderModule');
+
+                    $ocLazyLoad.load({
+                        name: moduleName,
+                    });
+
+                    deferred.resolve(angular.module(moduleName).component);
+                });
+
+
+
+                return deferred.promise;
+            }]
+        }
+    };
+
 
     $stateProvider.state(helloTemplate);
     $stateProvider.state(helloTemplateURL1);
@@ -209,4 +240,6 @@ mainModule.config(function ($stateProvider) {
     $stateProvider.state(lazyLoadingTemplate);
 
     $stateProvider.state(lazyLoadComponentModule);
+
+    $stateProvider.state(bundlelazyLoadComponentModule);
 });

@@ -13,8 +13,11 @@
     "@uirouter/angularjs": "^1.0.5",
     "angular": "^1.6.5",
     "bootstrap": "^3.3.7",
+    "bundle-loader": "^0.5.5",
     "jquery": "^3.2.1",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "oclazyload": "^1.1.0",
+    "promise-loader": "^1.0.0"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.16",
