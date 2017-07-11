@@ -190,3 +190,40 @@ What ocLazyLoad does is to allow you to load your additional files using a third
 In summary - you can lazily load code using only RequireJS, but you can't load angular modules and components only using RequireJS. There is a need for extra work, like this performed by ocLazyLoad.
 
 It allows you to separate different areas of your app into different physical bundles, the loading of which will be deferred until the associated route set up with ui-router is initially resolved. This allows you to maintain a single app structure without loading all modules up front. The primary motivation is performance, but it also has security implications because if the user is not authorized to access a route corresponding to a separate bundle, the code for that bundle may not even be loaded from the server.
+
+By Default you create traditional in file module by creating a file anf writing a IIFE in it which will run the angular code for registering component and controllerss or directives.
+This file is then added to script tag.
+
+OcLazyLoad :
+For Lazy Load of angular component , we should not add our component registering in IIFE , instead just write them in file and and them to script tag.
+So these components are not registered in angular bootstrap.Also angular does not allow registering component after bootstrap .
+To do so you have to tap into core api of angular.
+
+OcLazyLoad is an library to facilitate loading of angular component after bootstrapping of angular component.
+
+Webpack Dynamic Import:
+For Lazy loading the files (asynchronously module loading) same as AMD implementation like require.js .
+Webpack provide these lazy or dynamic loading with require.ensure or import().
+We can use require.ensure and import for loading files by having filename mentioned already or decide filename in runtime.
+We should avoid deciding filename at runtime as it takes the all the files in the folder and convert them to chunks.
+
+This also needs code splitting or chunking config in webpack config as chunkfile
+chunkFilename: '[name].js'
+If this is not set chunk name is set to number like 1.js
+
+import(/* webpackChunkName: "asyncModule1" */ './asyncModule1')
+
+
+require.ensure([], function(require) {
+                                require('./asyncModule2');
+
+                                $ocLazyLoad.load({
+                                    name: moduleName,
+                                });
+
+                                deferred.resolve(angular.module(moduleName).controller);
+                            }, 'asyncModule2'); //naming chunkfiles
+                            
+
+LazyLoading Html Template
+                            
