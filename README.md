@@ -232,4 +232,15 @@ LazyLoading Html Template
                 // lazy load the view
                 require.ensure([], () => resolve(require('../template/lazyLoadingTemplate.html')),'lazyLoadingTemplateHtml');
             });
-        }                           
+        } 
+        
+  Dynamic Imports
+  Tag 18-Dynamic_Import
+  var imported= import ( /* webpackChunkName: "asyncModule1" */ './asyncModule1');
+              imported.then(function () {
+                    $ocLazyLoad.load({
+                        name: moduleName,
+                    });
+
+                    deferred.resolve(angular.module(moduleName).controller);
+                });                                

@@ -99,13 +99,14 @@ mainModule.config(function ($stateProvider) {
                     deferred.resolve(angular.module(moduleName).controller);
                 }, 'asyncModule1'); //naming chunkfiles
 
-            //   var  import ( /* webpackChunkName: "asyncModule1" */ './asyncModule1').then(function () {
-            //         $ocLazyLoad.load({
-            //             name: moduleName,
-            //         });
+              var imported= import ( /* webpackChunkName: "asyncModule1" */ './asyncModule1');
+              imported.then(function () {
+                    $ocLazyLoad.load({
+                        name: moduleName,
+                    });
 
-            //         deferred.resolve(angular.module(moduleName).controller);
-            //     });
+                    deferred.resolve(angular.module(moduleName).controller);
+                });
 
                 return deferred.promise;
             }]
