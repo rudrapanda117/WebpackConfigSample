@@ -248,4 +248,7 @@ LazyLoading Html Template
   Tag 19-Dynamic_importing_Component
   
   Instead of using controller , use component and also lazy load the component .
+  
+  Using Bundle Loader
+  Tag 20-Using_Bundle_Loader
                                  
