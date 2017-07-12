@@ -401,3 +401,76 @@ var extractVendorCss = new ExtractTextPlugin('styles/vendor.style.css');
       
 include: [path.resolve(__dirname, "node_modules")],  Detect which css are from node_modules like Bootstrap
 exclude: [path.resolve(__dirname, "node_modules")],  Detect which css are from inside application 
+
+17) Using Bootstrap and font awesome
+Tag 25-Using_Font-awesome_n_glyphIcon_fonts
+In font-awesome folder the font files are imported at the begining.
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+This is also manipulated by webpack to point the actual font folder created.
+
+/* FONT PATH
+ * -------------------------- */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url(./font/fontawesome-webfont/674f50d287a8c48dc19ba404d20fe713.eot);
+  src: url(./font/fontawesome-webfont/674f50d287a8c48dc19ba404d20fe713.eot?#iefix&v=4.7.0) format('embedded-opentype'), url(./font/fontawesome-webfont/af7ae505a9eed503f8b8e6982036873e.woff2) format('woff2'), url(./font/fontawesome-webfont/fee66e712a8a08eef5805a46892932ad.woff) format('woff'), url(./font/fontawesome-webfont/b06871f281fee6b241d60582ae9369b9.ttf) format('truetype'), url(./font/fontawesome-webfont/912ec66d7572ff821749319396470bde.svg#fontawesomeregular) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+This separated the fonts to different font folder.
+
+/* It seems file loader is not working with font-awesome . It works well with glyphicons */
+      /*{
+      test: /\.(svg|woff|woff2|ttf|eot)$/,
+      loaders: [fontnIconLoader]
+        },*/
+      /* Added url loader for fonts of font awesome */
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        use: "url-loader?limit=10000&mimetype=application/font-woff&name=./font/[name]/[hash].[ext]"
+      }, {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        use: "url-loader?limit=10000&mimetype=application/font-woff&name=./font/[name]/[hash].[ext]"
+      }, {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        use: "url-loader?limit=10000&mimetype=application/octet-stream&name=./font/[name]/[hash].[ext]"
+      }, {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        use: "file-loader?&name=./font/[name]/[hash].[ext]"
+      }, {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        use: "url-loader?limit=10000&mimetype=image/svg+xml&name=./font/[name]/[hash].[ext]"
+      }
+      
+      
+   Font-awesome css is extracted to separate file to a folder where it can refer font folder
+     
+      var extractfontawesomeCss = new ExtractTextPlugin('fontawesome.style.css');
+       {
+        test: /\.css$/,
+        include: [path.resolve(__dirname, "node_modules/font-awesome/")],
+        use: extractfonawesomeCss.extract({
+          fallback: 'style-loader',
+          use: [
+            "css-loader" // translates CSS into CommonJS
+          ]
+        })
+      },
+      
+   This is because if we don't do it  then it can refer to font folder to which this css cannot access .
+   So the css is extracted to a folder where it can access the fonts according to ./font/fontawesome-webfont/674f50d287a8c48dc19ba404d20fe713.eot
+   
+   If the css is extracted to style folder and font loader is given ./font/fontawesome-webfont/674f50d287a8c48dc19ba404d20fe713.eot
+   Then font is extracted to ./font folder , where as css in style folder also points ./font/fontawesome-webfont/674f50d287a8c48dc19ba404d20fe713.eot
+   But the cath is when invoked from browser , font is searched in http://localhoat:8445/style/font/fontawesome-webfont/674f50d287a8c48dc19ba404d20fe713.eot which does not exist.
+   The extra path "style" in the url  is present due to fontawesome is extracted to style folder , hence the resolution of the fonts.

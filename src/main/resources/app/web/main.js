@@ -18,6 +18,8 @@ import 'jquery';
 import 'bootstrapCSS';
 import 'bootstrapJS';
 
+import 'fontAwesomeCSS';
+
 /* Importing assets from node modules */
 
 import '../styles/main.scss';

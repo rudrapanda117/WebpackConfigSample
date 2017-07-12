@@ -7,6 +7,9 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 var extractAppCss = new ExtractTextPlugin('styles/app.style.css');
 var extractVendorCss = new ExtractTextPlugin('styles/vendor.style.css');
 
+
+var extractfontawesomeCss = new ExtractTextPlugin('fontawesome.style.css');
+
 const buildPath = '../static/app/dist'
 
 module.exports = {
@@ -18,7 +21,7 @@ module.exports = {
   output: {
     filename: 'js/[name].bundle.js', // do not use hash in developement mode as old files are not removed and it may lead to memmory shortage
     path: path.join(__dirname, buildPath),
-    // publicPath: '/WebpackConfigSample/app/dist',
+     publicPath: '/WebpackConfigSample/app/dist',
     //publicPath: '/WebpackConfigSample',
     // publicPath: '/',
     //omit publipath for testing images or static assets
@@ -37,10 +40,12 @@ module.exports = {
       {
         test: /\.(png)$/,
         use: ['file-loader?name=/img/png/[name].[ext]']
-      }, {
-        test: /\.(svg|woff|woff2|ttf|eot)$/,
-        use: ['file-loader?name=/img/[name].[ext]']
-      }, {
+      },
+      //  {
+      //   test: /\.(svg|woff|woff2|ttf|eot)$/,
+      //   use: ['file-loader?name=/img/[name].[ext]']
+      // },
+      {
         test: /\.(jpg)$/,
         use: 'url-loader?limit=8192&name=[path][name].[ext]'
       },
@@ -109,8 +114,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: [path.resolve(__dirname, "node_modules")],
-        use: extractAppCss.extract({
+        include: [path.resolve(__dirname, "node_modules/font-awesome/")],
+        use: extractfontawesomeCss.extract({
           fallback: 'style-loader',
           use: [
             "css-loader" // translates CSS into CommonJS
@@ -120,12 +125,48 @@ module.exports = {
       {
         test: /\.css$/,
         include: [path.resolve(__dirname, "node_modules")],
+        exclude: [path.resolve(__dirname, "node_modules/font-awesome/")],
         use: extractVendorCss.extract({
           fallback: 'style-loader',
           use: [
             "css-loader" // translates CSS into CommonJS
           ]
         })
+      },
+
+
+      {
+        test: /\.css$/,
+        exclude: [path.resolve(__dirname, "node_modules")],
+        use: extractAppCss.extract({
+          fallback: 'style-loader',
+          use: [
+            "css-loader" // translates CSS into CommonJS
+          ]
+        })
+      },
+
+      /* It seems file loader is not working with font-awesome . It works well with glyphicons */
+      /*{
+      test: /\.(svg|woff|woff2|ttf|eot)$/,
+      loaders: [fontnIconLoader]
+        },*/
+      /* Added url loader for fonts of font awesome */
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        use: "url-loader?limit=10000&mimetype=application/font-woff&name=./font/[name]/[hash].[ext]"
+      }, {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        use: "url-loader?limit=10000&mimetype=application/font-woff&name=./font/[name]/[hash].[ext]"
+      }, {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        use: "url-loader?limit=10000&mimetype=application/octet-stream&name=./font/[name]/[hash].[ext]"
+      }, {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        use: "file-loader?&name=./font/[name]/[hash].[ext]"
+      }, {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        use: "url-loader?limit=10000&mimetype=image/svg+xml&name=./font/[name]/[hash].[ext]"
       }
     ]
   },
@@ -134,9 +175,9 @@ module.exports = {
     // contentBase: __dirname + buildPath, // for images
     port: 8445,
     //publicPath:'/'
-    // proxy:{
-    //   "*":"http://localhost:8181/"
-    // }  
+    proxy:{
+      "*":"http://localhost:8181/"
+    }  
   },
   resolve: {
     //extensions: ['*', '.js', '.jsx', '.json'],
@@ -144,6 +185,7 @@ module.exports = {
       jqueryalias: __dirname + "/node_modules/jquery/dist/jquery.js",
       bootstrapJS: __dirname + "/node_modules/bootstrap/dist/js/bootstrap.js",
       bootstrapCSS: __dirname + "/node_modules/bootstrap/dist/css/bootstrap.css",
+      fontAwesomeCSS: __dirname + "/node_modules/font-awesome/css/font-awesome.css",
     }
   },
   plugins: [
@@ -190,6 +232,7 @@ module.exports = {
     //new ExtractTextPlugin("styles/styles.css")
 
     //Order of extract text webpack plugin matters
+    extractfontawesomeCss,
     extractVendorCss,
     extractAppCss
   ]
