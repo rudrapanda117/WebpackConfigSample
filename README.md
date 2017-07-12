@@ -331,7 +331,7 @@ This leads to faster loading of images
  sass-loader" -> compiles Sass to CSS   
  
  15) Using extract test plugin
- 23-Extract_text_Plugin
+ Tag 23-Extract_text_Plugin
  This plugin is used to extract the css bundles in  js.
  Remove style-loader from ExtractTextPlugin.extract().use it should be on the fallback only
  ExtractTextPlugin.extract([notExtractLoader], loader, [options]) Creates an extracting loader from an existing loader.
@@ -345,4 +345,59 @@ options
 publicPath override the publicPath setting for this loader.
 The #extract method should receive a loader that outputs css. What was happening was that it was receiving a style-loader which outputs javascript code, which is intended to be injected into a webpage. This code would try to access window.
 
-You should not pass a loader string with style to #extract. However...if you set allChunks=false, then it will not build CSS files for non-initial chunks. Therefore it needs to know what loader to use to inject into the page.   
+You should not pass a loader string with style to #extract. However...if you set allChunks=false, then it will not build CSS files for non-initial chunks. Therefore it needs to know what loader to use to inject into the page. 
+
+new ExtractTextPlugin('styles/app.style.css')
+
+{
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            "css-loader" // translates CSS into CommonJS
+            ,
+            "sass-loader" // compiles Sass to CSS
+          ]
+        })
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            "css-loader" // translates CSS into CommonJS
+            ,
+            "sass-loader" // compiles Sass to CSS
+          ]
+        })
+      }
+      
+ 16) Separating css to vendor and app css
+Tag 24-Separate_css_and_sass_vendor-css_app-css-Extract_text_Plugin
+apart from test regex, we can use include and exclude contions like 
+var extractAppCss = new ExtractTextPlugin('styles/app.style.css');
+var extractVendorCss = new ExtractTextPlugin('styles/vendor.style.css');
+
+{
+        test: /\.css$/,
+        exclude: [path.resolve(__dirname, "node_modules")],
+        use: extractAppCss.extract({
+          fallback: 'style-loader',
+          use: [
+            "css-loader" // translates CSS into CommonJS
+          ]
+        })
+      },
+      {
+        test: /\.css$/,
+        include: [path.resolve(__dirname, "node_modules")],
+        use: extractVendorCss.extract({
+          fallback: 'style-loader',
+          use: [
+            "css-loader" // translates CSS into CommonJS
+          ]
+        })
+      }
+      
+include: [path.resolve(__dirname, "node_modules")],  Detect which css are from node_modules like Bootstrap
+exclude: [path.resolve(__dirname, "node_modules")],  Detect which css are from inside application 

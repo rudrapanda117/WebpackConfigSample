@@ -6,8 +6,19 @@ import 'jquery';
 //import 'jquery/dist/jquery.js';
 //import 'jqueryalias';
 
+/* Importing assets from node modules */
 //import '../node_modules/bootstrap';
+
 //import '../node_modules/bootstrap/dist/css/bootstrap.css';
+//import '../node_modules/bootstrap/dist/js/bootstrap';
+
+//import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/js/bootstrap';
+
+import 'bootstrapCSS';
+import 'bootstrapJS';
+
+/* Importing assets from node modules */
 
 import '../styles/main.scss';
 import '../styles/cssfile.css';

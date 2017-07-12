@@ -4,7 +4,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
-
+var extractAppCss = new ExtractTextPlugin('styles/app.style.css');
+var extractVendorCss = new ExtractTextPlugin('styles/vendor.style.css');
 
 const buildPath = '../static/app/dist'
 
@@ -61,31 +62,76 @@ module.exports = {
       //     loader: "css-loader" // translates CSS into CommonJS
       //   }]
       // }
-{
+      //Extract text plugin
+      // {
+      //   test: /\.scss$/,
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader', //creates style nodes from JS strings
+      //     use: [
+      //       "css-loader" // translates CSS into CommonJS
+      //       ,
+      //       "sass-loader" // compiles Sass to CSS
+      //     ]
+      //   })
+      // }, {
+      //   test: /\.css$/,
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader',
+      //     use: [
+      //       "css-loader" // translates CSS into CommonJS
+      //     ]
+      //   })
+      // }
+
+      // Separate vendor css and app css
+      {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',//creates style nodes from JS strings
-          use:[          
-           "css-loader" // translates CSS into CommonJS
+        include: [path.resolve(__dirname, "node_modules")],
+        use: extractVendorCss.extract({
+          fallback: 'style-loader', //creates style nodes from JS strings
+          use: [
+            "css-loader" // translates CSS into CommonJS
             ,
-          "sass-loader" // compiles Sass to CSS
-        ]
+            "sass-loader" // compiles Sass to CSS
+          ]
+        })
+      }, {
+        test: /\.scss$/,
+        exclude: [path.resolve(__dirname, "node_modules")],
+        use: extractAppCss.extract({
+          fallback: 'style-loader', //creates style nodes from JS strings
+          use: [
+            "css-loader" // translates CSS into CommonJS
+            ,
+            "sass-loader" // compiles Sass to CSS
+          ]
         })
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
+        exclude: [path.resolve(__dirname, "node_modules")],
+        use: extractAppCss.extract({
           fallback: 'style-loader',
-          use:[
-          "css-loader" // translates CSS into CommonJS
-         ]
+          use: [
+            "css-loader" // translates CSS into CommonJS
+          ]
+        })
+      },
+      {
+        test: /\.css$/,
+        include: [path.resolve(__dirname, "node_modules")],
+        use: extractVendorCss.extract({
+          fallback: 'style-loader',
+          use: [
+            "css-loader" // translates CSS into CommonJS
+          ]
         })
       }
     ]
   },
   devServer: {
     //contentBase: __dirname + '/template', // for templates
-   // contentBase: __dirname + buildPath, // for images
+    // contentBase: __dirname + buildPath, // for images
     port: 8445,
     //publicPath:'/'
     // proxy:{
@@ -95,7 +141,9 @@ module.exports = {
   resolve: {
     //extensions: ['*', '.js', '.jsx', '.json'],
     alias: {
-      jqueryalias: __dirname + "/node_modules/jquery/dist/jquery.js"
+      jqueryalias: __dirname + "/node_modules/jquery/dist/jquery.js",
+      bootstrapJS: __dirname + "/node_modules/bootstrap/dist/js/bootstrap.js",
+      bootstrapCSS: __dirname + "/node_modules/bootstrap/dist/css/bootstrap.css",
     }
   },
   plugins: [
@@ -138,6 +186,11 @@ module.exports = {
     //               return module.resource && module.resource.indexOf(path.resolve(__dirname, 'web')) === -1;
     //           }
     //       }),
-    new ExtractTextPlugin("styles/styles.css")
+
+    //new ExtractTextPlugin("styles/styles.css")
+
+    //Order of extract text webpack plugin matters
+    extractVendorCss,
+    extractAppCss
   ]
 }

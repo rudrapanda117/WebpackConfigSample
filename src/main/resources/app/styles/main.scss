@@ -5,9 +5,9 @@
 }
 
 .small-blue-square {
-  @include square(20px, rgb(0,0,255));
+  @include square(100px, rgb(0,0,255));
 }
 
 .big-red-square {
-  @include square(300px, rgb(255,0,0));
+  @include square(100px, rgb(255,0,0));
 }
