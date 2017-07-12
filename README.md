@@ -326,6 +326,23 @@ This leads to faster loading of images
  14) Style Loaders
  Tag 22-Style_CSS_SASS_Loaders
  this loader consist of three loaders style loader, css loader and sass loader.
- style-loader" -> creates style nodes from JS strings 
- css-loader" -> translates CSS into CommonJS    
- sass-loader" -> compiles Sass to CSS       
+ style-loader" -> creates style nodes from JS strings .Outputs js code 
+ css-loader" -> translates CSS into CommonJS    . Here the css is bundled into js file .Css have no effect on page here as browser dont know how to extract the css .
+ sass-loader" -> compiles Sass to CSS   
+ 
+ 15) Using extract test plugin
+ 23-Extract_text_Plugin
+ This plugin is used to extract the css bundles in  js.
+ Remove style-loader from ExtractTextPlugin.extract().use it should be on the fallback only
+ ExtractTextPlugin.extract([notExtractLoader], loader, [options]) Creates an extracting loader from an existing loader.
+
+notExtractLoader (optional) the loader(s) that should be used when the css is not extracted (i.e. in an > additional chunk when allChunks: false)
+
+loader the loader(s) that should be used for converting the resource to a css exporting module.
+
+options
+
+publicPath override the publicPath setting for this loader.
+The #extract method should receive a loader that outputs css. What was happening was that it was receiving a style-loader which outputs javascript code, which is intended to be injected into a webpage. This code would try to access window.
+
+You should not pass a loader string with style to #extract. However...if you set allChunks=false, then it will not build CSS files for non-initial chunks. Therefore it needs to know what loader to use to inject into the page.   

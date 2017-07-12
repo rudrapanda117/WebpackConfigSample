@@ -43,25 +43,44 @@ module.exports = {
         test: /\.(jpg)$/,
         use: 'url-loader?limit=8192&name=[path][name].[ext]'
       },
-      {
+      // {
+      //   test: /\.scss$/,
+      //   use: [{
+      //     loader: "style-loader" // creates style nodes from JS strings
+      //   }, {
+      //     loader: "css-loader" // translates CSS into CommonJS
+      //   }, {
+      //     loader: "sass-loader" // compiles Sass to CSS
+      //   }]
+      // },
+      // {
+      //   test: /\.css$/,
+      //   use: [{
+      //     loader: "style-loader" // creates style nodes from JS strings
+      //   }, {
+      //     loader: "css-loader" // translates CSS into CommonJS
+      //   }]
+      // }
+{
         test: /\.scss$/,
-        use: [{
-          loader: "style-loader" // creates style nodes from JS strings
-        }, {
-          loader: "css-loader" // translates CSS into CommonJS
-        }, {
-          loader: "sass-loader" // compiles Sass to CSS
-        }]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',//creates style nodes from JS strings
+          use:[          
+           "css-loader" // translates CSS into CommonJS
+            ,
+          "sass-loader" // compiles Sass to CSS
+        ]
+        })
       },
       {
         test: /\.css$/,
-        use: [{
-          loader: "style-loader" // creates style nodes from JS strings
-        }, {
-          loader: "css-loader" // translates CSS into CommonJS
-        }]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use:[
+          "css-loader" // translates CSS into CommonJS
+         ]
+        })
       }
-
     ]
   },
   devServer: {
@@ -119,5 +138,6 @@ module.exports = {
     //               return module.resource && module.resource.indexOf(path.resolve(__dirname, 'web')) === -1;
     //           }
     //       }),
+    new ExtractTextPlugin("styles/styles.css")
   ]
 }
