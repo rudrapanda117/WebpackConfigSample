@@ -303,4 +303,29 @@ Not publicPath :'/'. This loades images from http://img/png/Home-icon5.png.
 Wen we omit public path , it points to /app the root folder . http://localhost:8445/img/png/Home-icon8.png
 
 But without publicpath and publicpath pointing to / webpack dev server shows "webpack output is served from /"
-                     
+
+Ommiting the public path , also makes the generated assests like js and css bundle also served under root folder from dev server memory . 
+
+To work with publicpath   /WebpackConfigSample/app/dist , we have to turn on the proxy and put the images under static/app/dist folder .
+Because under /WebpackConfigSample/app/dist images are not available , so dev server forwards this request to the original server where images are served from app/dist folder.
+
+Url loader converts the image to data scheme with base64 encoding and returns  DataURL     .
+So the whole image is converted to inlined base64 code .
+This leads to faster loading of images
+ {
+        test: /\.(jpg)$/,
+        use: 'url-loader?limit=8192&name=[path][name].[ext]'
+      }
+      Any jpg images encontered invoke url loader , if the size is less than 8192 convert the image to dataUrl otherwise if the size is greater invoke file loader to handle the image and copy the image to /app/dist folder with name as [path][name].[ext] .
+      We can mention the [hash] for cache busting also.
+      
+      Click Ui-router with sync Module to see the jpg images loading faster ass they are inlined .
+      The png images which are copied to dist folder using file loader are loaded slowly.
+      This is because browser can make 5 request parallel at a given time.  
+      
+ 14) Style Loaders
+ Tag 22-Style_CSS_SASS_Loaders
+ this loader consist of three loaders style loader, css loader and sass loader.
+ style-loader" -> creates style nodes from JS strings 
+ css-loader" -> translates CSS into CommonJS    
+ sass-loader" -> compiles Sass to CSS       

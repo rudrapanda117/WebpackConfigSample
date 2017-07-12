@@ -33,7 +33,7 @@
                 <tr ng-repeat="driver in driversList">
                     <td>{{$index + 1}}</td>
                     <td>
-                        <!--<img src="img/flags/{{driver.Driver.nationality}}.png" />--> {{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}}
+                        <!--<img src="img/flags/{{driver.Driver.nationality}}.png" />-->{{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}}
                     </td>
                     <td>{{driver.Constructors[0].name}}</td>
                     <td>{{driver.points}}</td>
@@ -58,6 +58,29 @@
         <a ui-sref="usingbundleloaderModule" ui-sref-active="active">Ui-router with lazyLoading ComponentModule using using bundle loader</a></br>
 
         <ui-view></ui-view>
+
+
+
+
+        <div class="small-blue-square">
+            SASS
+        </div>
+
+        <div class="big-red-square">
+            SASS
+        </div>
+
+        <div class="big-yellow-box">
+            CSS
+        </div>
+
+        <div id="bootstrapexample">
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">Profile</a></li>
+                <li role="presentation"><a href="#">Messages</a></li>
+            </ul>
+        </div>
 
     </div>
 </body>

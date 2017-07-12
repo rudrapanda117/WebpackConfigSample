@@ -6,6 +6,12 @@ import 'jquery';
 //import 'jquery/dist/jquery.js';
 //import 'jqueryalias';
 
+//import '../node_modules/bootstrap';
+//import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+import '../styles/main.scss';
+import '../styles/cssfile.css';
+
 import './controller1';
 
 import './syncModule';

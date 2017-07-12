@@ -17,10 +17,10 @@ module.exports = {
   output: {
     filename: 'js/[name].bundle.js', // do not use hash in developement mode as old files are not removed and it may lead to memmory shortage
     path: path.join(__dirname, buildPath),
-   // publicPath: '/WebpackConfigSample/app/dist',
-   //publicPath: '/WebpackConfigSample',
-   // publicPath: '/',
-   //omit publipath for testing images or static assets
+    // publicPath: '/WebpackConfigSample/app/dist',
+    //publicPath: '/WebpackConfigSample',
+    // publicPath: '/',
+    //omit publipath for testing images or static assets
     chunkFilename: '[name].js'
   },
   module: {
@@ -42,13 +42,31 @@ module.exports = {
       }, {
         test: /\.(jpg)$/,
         use: 'url-loader?limit=8192&name=[path][name].[ext]'
+      },
+      {
+        test: /\.scss$/,
+        use: [{
+          loader: "style-loader" // creates style nodes from JS strings
+        }, {
+          loader: "css-loader" // translates CSS into CommonJS
+        }, {
+          loader: "sass-loader" // compiles Sass to CSS
+        }]
+      },
+      {
+        test: /\.css$/,
+        use: [{
+          loader: "style-loader" // creates style nodes from JS strings
+        }, {
+          loader: "css-loader" // translates CSS into CommonJS
+        }]
       }
 
     ]
   },
   devServer: {
     //contentBase: __dirname + '/template', // for templates
-     contentBase: __dirname + buildPath, // for images
+   // contentBase: __dirname + buildPath, // for images
     port: 8445,
     //publicPath:'/'
     // proxy:{
