@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "devserverwithoutproxy": "cross-env GREET=\"Webpac dev server is running without proxy\" ISPROXY=false npm run dev",
+    "devserverwithproxy": "cross-env GREET=\"Webpac dev server is running with proxy\"  ISPROXY=true npm run dev",
+    "dev": " webpack-dev-server"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.16",
+    "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
     "eslint": "^4.2.0",
     "extract-text-webpack-plugin": "^2.1.2",

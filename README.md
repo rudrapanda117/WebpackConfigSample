@@ -484,3 +484,21 @@ This separated the fonts to different font folder.
 This option will enable ESLint autofix feature.
 
 Be careful: this option might cause webpack to enter an infinite build loop if some issues cannot be fixed properly.
+
+19) Pass variables from npm or CLI  to application through  webpack
+Tag 27-Define_Enviroment_plugin
+
+use cross-env
+
+extended-define-webpack-plugin:inject a configuration object and use it in the code.
+Usage
+https://yarnpkg.com/en/package/extended-define-webpack-plugin#readme
+
+Define Plugin :The DefinePlugin allows you to create global constants which can be configured at compile time .
+Usage
+http://tomasalabes.me/blog/_site/web-development/2017/01/03/Useful-Webpack-Define-Plugin-Usages.html
+https://blog.johnnyreilly.com/2016/07/using-webpacks-defineplugin-with-typescript.html
+
+EnvironmentPlugin : The EnvironmentPlugin is shorthand for using the DefinePlugin on process.env keys.
+DotenvPlugin :The third-party DotenvPlugin (dotenv-webpack) allows you to expose (a subset of) dotenv variables.
+

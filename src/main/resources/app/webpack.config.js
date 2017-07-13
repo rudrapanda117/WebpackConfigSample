@@ -10,9 +10,9 @@ var extractVendorCss = new ExtractTextPlugin('styles/vendor.style.css');
 
 var extractfontawesomeCss = new ExtractTextPlugin('fontawesome.style.css');
 
-const buildPath = '../static/app/dist'
+var buildPath = '../static/app/dist'
 
-module.exports = {
+var webpackconfig = {
 
   entry: {
     app: ['./web/main.js'],
@@ -21,7 +21,7 @@ module.exports = {
   output: {
     filename: 'js/[name].bundle.js', // do not use hash in developement mode as old files are not removed and it may lead to memmory shortage
     path: path.join(__dirname, buildPath),
-     publicPath: '/WebpackConfigSample/app/dist',
+    //publicPath: '/WebpackConfigSample/app/dist',
     //publicPath: '/WebpackConfigSample',
     // publicPath: '/',
     //omit publipath for testing images or static assets
@@ -169,12 +169,12 @@ module.exports = {
         use: "url-loader?limit=10000&mimetype=image/svg+xml&name=./font/[name]/[hash].[ext]"
       },
       //Eslint
-      {
-        enforce: "pre",
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: "eslint-loader"
-      },
+      // {
+      //   enforce: "pre",
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: "eslint-loader"
+      // },
     ]
   },
   devServer: {
@@ -182,9 +182,9 @@ module.exports = {
     // contentBase: __dirname + buildPath, // for images
     port: 8445,
     //publicPath:'/'
-    proxy:{
-      "*":"http://localhost:8181/"
-    }  
+    // proxy: {
+    //   "*": "http://localhost:8181/"
+    // }
   },
   resolve: {
     //extensions: ['*', '.js', '.jsx', '.json'],
@@ -241,6 +241,21 @@ module.exports = {
     //Order of extract text webpack plugin matters
     extractfontawesomeCss,
     extractVendorCss,
-    extractAppCss
+    extractAppCss,
+    // Use npm arguments in webpack
+    new webpack.DefinePlugin({
+      GREETUSER: JSON.stringify(process.env.GREET)
+    })
   ]
 }
+if (process.env.ISPROXY.toString().trim() === 'true') {
+  webpackconfig.output.publicPath = '/WebpackConfigSample/app/dist';
+  webpackconfig.devServer.proxy = {
+    "*": "http://localhost:8181/"
+  }
+} else {
+  webpackconfig.output.publicPath = ""
+}
+
+
+module.exports = webpackconfig;
