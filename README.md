@@ -474,3 +474,13 @@ This separated the fonts to different font folder.
    Then font is extracted to ./font folder , where as css in style folder also points ./font/fontawesome-webfont/674f50d287a8c48dc19ba404d20fe713.eot
    But the cath is when invoked from browser , font is searched in http://localhoat:8445/style/font/fontawesome-webfont/674f50d287a8c48dc19ba404d20fe713.eot which does not exist.
    The extra path "style" in the url  is present due to fontawesome is extracted to style folder , hence the resolution of the fonts.
+   
+   18) Eslint
+   Tag 26-ESLINTING
+   First install eslint and then eslint loader opposite does weird stuff.
+   
+   fix (default: false)
+
+This option will enable ESLint autofix feature.
+
+Be careful: this option might cause webpack to enter an infinite build loop if some issues cannot be fixed properly.

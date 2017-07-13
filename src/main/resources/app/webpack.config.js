@@ -167,7 +167,14 @@ module.exports = {
       }, {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: "url-loader?limit=10000&mimetype=image/svg+xml&name=./font/[name]/[hash].[ext]"
-      }
+      },
+      //Eslint
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: "eslint-loader"
+      },
     ]
   },
   devServer: {
