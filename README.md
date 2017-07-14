@@ -502,3 +502,9 @@ https://blog.johnnyreilly.com/2016/07/using-webpacks-defineplugin-with-typescrip
 EnvironmentPlugin : The EnvironmentPlugin is shorthand for using the DefinePlugin on process.env keys.
 DotenvPlugin :The third-party DotenvPlugin (dotenv-webpack) allows you to expose (a subset of) dotenv variables.
 
+
+20) Other Plugins and loaders.
+imports loader:
+expose loader:
+export loader:
+extract loader:

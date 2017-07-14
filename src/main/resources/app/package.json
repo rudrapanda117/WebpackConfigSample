@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devserverwithoutproxy": "cross-env GREET=\"Webpac dev server is running without proxy\" ISPROXY=false npm run dev",
-    "devserverwithproxy": "cross-env GREET=\"Webpac dev server is running with proxy\"  ISPROXY=true npm run dev",
-    "dev": " webpack-dev-server"
+    "devserverwithoutproxy": "cross-env GREET=\"Webpac dev server is running without proxy\" ISPROXY=false ISBUILD=false npm run dev",
+    "devserverwithproxy": "cross-env GREET=\"Webpac dev server is running with proxy\"  ISPROXY=true  ISBUILD=false npm run dev",
+    "dev": "webpack-dev-server",
+    "build":"cross-env ISBUILD=true webpack"
   },
   "keywords": [],
   "author": "",

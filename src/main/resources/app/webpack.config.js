@@ -248,14 +248,19 @@ var webpackconfig = {
     })
   ]
 }
-if (process.env.ISPROXY.toString().trim() === 'true') {
-  webpackconfig.output.publicPath = '/WebpackConfigSample/app/dist';
-  webpackconfig.devServer.proxy = {
-    "*": "http://localhost:8181/"
-  }
+if (process.env.ISBUILD.toString().trim() === 'true') {
+
 } else {
-  webpackconfig.output.publicPath = ""
+  if (process.env.ISPROXY.toString().trim() === 'true') {
+    webpackconfig.output.publicPath = '/WebpackConfigSample/app/dist';
+    webpackconfig.devServer.proxy = {
+      "*": "http://localhost:8181/"
+    }
+  } else {
+    webpackconfig.output.publicPath = ""
+  }
 }
+
 
 
 module.exports = webpackconfig;
