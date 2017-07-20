@@ -3,6 +3,7 @@ package com.webpackconfigsample.WebpackConfigSample;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloController {
@@ -11,10 +12,11 @@ public class HelloController {
     public String index() {
         return "index";
     }
-
     
-    @RequestMapping("/hello2.htm")
-    public String hello2() {
-        return "hello2";
+    @RequestMapping("/whoami")
+    @ResponseBody
+    public Object whoami() {
+        return "rudrasish";
     }
+
 }
