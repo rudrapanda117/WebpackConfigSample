@@ -249,7 +249,7 @@ var webpackconfig = {
   ]
 }
 if (process.env.ISBUILD.toString().trim() === 'true') {
-
+webpackconfig.output.publicPath = '/WebpackConfigSample/app/dist';
 } else {
   if (process.env.ISPROXY.toString().trim() === 'true') {
     webpackconfig.output.publicPath = '/WebpackConfigSample/app/dist';
