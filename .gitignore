@@ -20,7 +20,7 @@
 nbproject/private/
 build/
 nbbuild/
-##dist/
+
 nbdist/
 .nb-gradle/
 src/main/resources/app/\.vscode/
@@ -28,6 +28,6 @@ src/main/resources/app/\.vscode/
 /bin/
 node_modules/
 src/main/resources/app/node_modules/
-###src/main/resources/static/app/dist/
+
 src/main/resources/app/npm-debug.*
 

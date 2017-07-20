@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-</head>
+<link href="fontawesome.style.css" rel="stylesheet"><link href="styles/vendor.style.css" rel="stylesheet"><link href="styles/app.style.css" rel="stylesheet"></head>
 
 <body>
     <div id="hello">
@@ -33,7 +33,7 @@
                 <tr ng-repeat="driver in driversList">
                     <td>{{$index + 1}}</td>
                     <td>
-                        <!--<img src="img/flags/{{driver.Driver.nationality}}.png" />--> {{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}}
+                        <!--<img src="img/flags/{{driver.Driver.nationality}}.png" />-->{{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}}
                     </td>
                     <td>{{driver.Constructors[0].name}}</td>
                     <td>{{driver.points}}</td>
@@ -45,10 +45,69 @@
         <a ui-sref="helloTemplate" ui-sref-active="active">Ui-router with inline template</a></br>
         <a ui-sref="helloTemplateURL1" ui-sref-active="active">Ui-router with templateURL served from static folder</a></br>
         <a ui-sref="helloTemplateURL2" ui-sref-active="active">Ui-router with templateURL served from template folder</a></br>
+        <a ui-sref="helloTemplateInlineHtml" ui-sref-active="active">Ui-router with template inlined with html loader</a></br>
+        <a ui-sref="syncModuleController" ui-sref-active="active">Ui-router with sync Module</a></br>
+
+        <a ui-sref="asyncController1" ui-sref-active="active">Ui-router with async Module1</a></br>
+        <a ui-sref="asyncController2" ui-sref-active="active">Ui-router with async Module2</a></br>
+
+        <a ui-sref="lazyLoadingTemplate" ui-sref-active="active">Ui-router with lazyLoading html Template</a></br>
+
+        <a ui-sref="lazyLoadComponentModule" ui-sref-active="active">Ui-router with lazyLoading ComponentModule</a></br>
+
+        <a ui-sref="usingbundleloaderModule" ui-sref-active="active">Ui-router with lazyLoading ComponentModule using using bundle loader</a></br>
 
         <ui-view></ui-view>
 
+
+
+</br>
+</hr>
+        <div class="small-blue-square">
+            SASS
+        </div>
+</br>
+</hr>
+        <div class="big-red-square">
+            SASS
+        </div>
+</br>
+</hr>
+        <div class="big-yellow-box">
+            CSS
+        </div>
+
+</br>
+</hr>
+Bootstrap
+        <div id="bootstrapexample">
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">Profile</a></li>
+                <li role="presentation"><a href="#">Messages</a></li>
+            </ul>
+        </div>
+
+
+</br>
+</hr>
+Font awesome
+<div>
+    <span><i class="fa fa-fort-awesome fa-5x" aria-hidden="true"></i></span>
+</div>
+
+</br>
+</hr>
+Bootstrap glyphicon
+<div>
+    
+</button>
+   <span class="glyphicon glyphicon-fire" style="font-size:75px;" aria-hidden="true"></span> 
+</div>
+
+
+
     </div>
-<script type="text/javascript" src="/WebpackConfigSample/app/dist/js/vendor.bundle.js"></script><script type="text/javascript" src="/WebpackConfigSample/app/dist/js/app.bundle.js"></script></body>
+<script type="text/javascript" src="js/vendor.bundle.js"></script><script type="text/javascript" src="js/app.bundle.js"></script></body>
 
 </html>
