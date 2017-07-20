@@ -154,19 +154,19 @@ var webpackconfig = {
       /* Added url loader for fonts of font awesome */
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        use: "url-loader?limit=10000&mimetype=application/font-woff&name=./font/[name]/[hash].[ext]"
+        use: "url-loader?limit=10000&mimetype=application/font-woff&name=/font/[name]/[hash].[ext]"
       }, {
         test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        use: "url-loader?limit=10000&mimetype=application/font-woff&name=./font/[name]/[hash].[ext]"
+        use: "url-loader?limit=10000&mimetype=application/font-woff&name=/font/[name]/[hash].[ext]"
       }, {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        use: "url-loader?limit=10000&mimetype=application/octet-stream&name=./font/[name]/[hash].[ext]"
+        use: "url-loader?limit=10000&mimetype=application/octet-stream&name=/font/[name]/[hash].[ext]"
       }, {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        use: "file-loader?&name=./font/[name]/[hash].[ext]"
+        use: "file-loader?&name=/font/[name]/[hash].[ext]"
       }, {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: "url-loader?limit=10000&mimetype=image/svg+xml&name=./font/[name]/[hash].[ext]"
+        use: "url-loader?limit=10000&mimetype=image/svg+xml&name=/font/[name]/[hash].[ext]"
       },
       //Eslint
       // {
