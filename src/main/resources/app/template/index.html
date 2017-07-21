@@ -1,15 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-    </head>
-    <body>
-        <div id="hello">
-    Hello!!@
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+    <div id="hello">
+        Hello!!@
     </div>
-<script src="dist/js/bundle.js"></script>
-    </body>
+    <div id="jqueryhello1">
+        Hello from JQuery using $
+    </div>
+    <div id="jqueryhello2">
+        Hello from JQuery using JQuery
+    </div>
+    <div id="jqueryhello3">
+        Hello from JQuery using window.jquery
+    </div>
+    <!--<script src="dist/js/bundle.js"></script>-->
+    <div ng-app="F1FeederApp" ng-controller="driversController">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="4">Drivers Championship Standings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="driver in driversList">
+                    <td>{{$index + 1}}</td>
+                    <td>
+                        <!--<img src="img/flags/{{driver.Driver.nationality}}.png" />-->{{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}}
+                    </td>
+                    <td>{{driver.Constructors[0].name}}</td>
+                    <td>{{driver.points}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <a ui-sref="helloTemplate" ui-sref-active="active">Ui-router with inline template</a></br>
+        <a ui-sref="helloTemplateURL1" ui-sref-active="active">Ui-router with templateURL served from static folder</a></br>
+        <a ui-sref="helloTemplateURL2" ui-sref-active="active">Ui-router with templateURL served from template folder</a></br>
+        <a ui-sref="helloTemplateInlineHtml" ui-sref-active="active">Ui-router with template inlined with html loader</a></br>
+        <a ui-sref="syncModuleController" ui-sref-active="active">Ui-router with sync Module</a></br>
+
+        <a ui-sref="asyncController1" ui-sref-active="active">Ui-router with async Module1</a></br>
+        <a ui-sref="asyncController2" ui-sref-active="active">Ui-router with async Module2</a></br>
+
+        <a ui-sref="lazyLoadingTemplate" ui-sref-active="active">Ui-router with lazyLoading html Template</a></br>
+
+        <a ui-sref="lazyLoadComponentModule" ui-sref-active="active">Ui-router with lazyLoading ComponentModule</a></br>
+
+        <a ui-sref="usingbundleloaderModule" ui-sref-active="active">Ui-router with lazyLoading ComponentModule using using bundle loader</a></br>
+
+        <ui-view></ui-view>
+
+
+
+</br>
+</hr>
+        <div class="small-blue-square">
+            SASS
+        </div>
+</br>
+</hr>
+        <div class="big-red-square">
+            SASS
+        </div>
+</br>
+</hr>
+        <div class="big-yellow-box">
+            CSS
+        </div>
+
+</br>
+</hr>
+Bootstrap
+        <div id="bootstrapexample">
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">Profile</a></li>
+                <li role="presentation"><a href="#">Messages</a></li>
+            </ul>
+        </div>
+
+
+</br>
+</hr>
+Font awesome
+<div>
+    <span><i class="fa fa-fort-awesome fa-5x" aria-hidden="true"></i></span>
+</div>
+
+</br>
+</hr>
+Bootstrap glyphicon
+<div>
+    
+</button>
+   <span class="glyphicon glyphicon-fire" style="font-size:75px;" aria-hidden="true"></span> 
+</div>
+
+
+
+    </div>
+</body>
+
 </html>

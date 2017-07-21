@@ -4,18 +4,31 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "devserverwithoutproxy": "cross-env GREET=\"Webpac dev server is running without proxy\" ISPROXY=false ISBUILD=false npm run dev",
+    "devserverwithproxy": "cross-env GREET=\"Webpac dev server is running with proxy\"  ISPROXY=true  ISBUILD=false npm run dev",
+    "dev": "webpack-dev-server",
+    "build":"cross-env ISBUILD=true webpack"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.5",
     "angular": "^1.6.5",
     "bootstrap": "^3.3.7",
-    "jquery": "^3.2.1"
+    "bundle-loader": "^0.5.5",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "normalize.css": "^7.0.0",
+    "oclazyload": "^1.1.0",
+    "promise-loader": "^1.0.0"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^0.1.16",
+    "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
+    "eslint": "^4.2.0",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "html-loader": "^0.4.5",
